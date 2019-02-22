@@ -1,5 +1,6 @@
 import React from 'react';
 import {StyleSheet, TextInput, View} from 'react-native';
+import PropTypes from 'prop-types';
 
 export default class SearchInput extends React.Component {
 
@@ -20,6 +21,8 @@ export default class SearchInput extends React.Component {
         onSubmit(newLocation); // This closure is being passed by the parent, App
         this.setState({newLocation: ''});
     };
+
+
 
     render() {
 
@@ -44,6 +47,11 @@ export default class SearchInput extends React.Component {
         );
     }
 }
+
+SearchInput.propTypes = {
+    onSubmit: PropTypes.func.isRequired,
+    placeholder: PropTypes.string,
+};
 
 const styles = StyleSheet.create({
     container: {

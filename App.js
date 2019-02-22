@@ -32,6 +32,7 @@ export default class App extends React.Component {
           temperature,
         });
       } catch (e) {
+        console.log('Could not fetch weather information');
 
       }
     }
@@ -43,7 +44,7 @@ export default class App extends React.Component {
 
     return (
       <KeyboardAvoidingView style={styles.container} behavior="padding">
-        <ImageBackground source={getImageForWeather('Clear')} style={styles.imageContainer} imageStyle={styles.image}>
+        <ImageBackground source={getImageForWeather(weather)} style={styles.imageContainer} imageStyle={styles.image}>
         <View style={styles.detailsContainer}>
           <Text style={[styles.largeText, styles.textStyle]}>{location}</Text>
           <Text style={[styles.smallText, styles.textStyle]}>{weather}</Text>
