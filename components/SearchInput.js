@@ -2,16 +2,42 @@ import React from 'react';
 import {StyleSheet, TextInput, View} from 'react-native';
 
 export default class SearchInput extends React.Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {newLocation: '',};
+    }
+
+    handleChangeText = (typedLocation) => {
+        // this.props, referenced here, is actually owned by the App and not the child component, SearchInput
+        this.setState({newLocation: typedLocation});
+    };
+
+    handleSubmitEditing = () => {
+        const {onSubmit} = this.props;
+        const {newLocation} = this.state;
+        if (!newLocation) return;
+        onSubmit(newLocation); // This closure is being passed by the parent, App
+        this.setState({newLocation: ''});
+    };
+
     render() {
+
+        const {placeholder} = this.props;
+        const {newLocation} = this.state;
+
         return(
             <View style={styles.container}>
                 <TextInput
                     autoCorrect={false}
-                    placeholder={this.props.placeholder}
+                    value={newLocation}
+                    placeholder={placeholder}
                     placeholderTextColor="white"
                     underlineColorAndroid="transparent"
                     style={styles.textInput}
                     clearButtonMode="always"
+                    onChangeText={this.handleChangeText}
+                    onSubmitEditing={this.handleSubmitEditing}
                 ></TextInput>
             </View>
 
